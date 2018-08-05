@@ -1,0 +1,77 @@
+html {
+	font-family: "helvetica";
+}
+
+body {
+	background-color: white;
+}
+
+hr {
+	opacity: 0.35;
+}
+
+#convo-container {
+	height: 125px;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+#form {
+	position: absolute;
+	bottom: 2px;
+	left: 10px;
+	width: 380px;
+}
+
+input {
+	border: 0;
+	width: 277px;
+	height: 35px;
+	outline: none;
+	font-size: 22px;
+	margin-bottom: 4.8px;
+	vertical-align: bottom;
+}
+
+#output {
+	line-height: 21px;
+}
+
+.btn {
+	color: rgb(89,215,115);
+	font-size: 16px;
+	background-color: white;
+	padding: 10px 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	border-color: rgba(0, 0, 0, .55);
+	cursor: pointer;
+	width: 60px;
+	line-height: 20px;
+	outline: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	pointer-events: none;
+	opacity: .35;
+	position: relative;
+	bottom: 3px;
+	left: 14px;
+}
+
+.ready {
+	pointer-events: unset;
+	opacity: 1;
+}
+
+.btn:not(:focus):hover {
+	background-color: rgb(89,215,115);
+	color: white;
+}
+
+.btn:active {
+	color: rgba(0, 0, 0, .55);
+	background-color: rgb(89,215,115);
+}
+
