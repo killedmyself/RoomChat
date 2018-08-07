@@ -28,24 +28,23 @@ input {
 	width: 277px;
 	height: 35px;
 	outline: none;
-	font-size: 22px;
+	font-size: 16px;
 	margin-bottom: 4.8px;
 	vertical-align: bottom;
 }
 
 #output {
-	line-height: 21px;
+	line-height: 16px;
 }
 
 .btn {
-	color: rgb(89,215,115);
+	color: gray;
 	font-size: 16px;
 	background-color: white;
 	padding: 10px 5px;
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 3px;
-	border-color: rgba(0, 0, 0, .55);
 	cursor: pointer;
 	width: 60px;
 	line-height: 20px;
@@ -66,12 +65,13 @@ input {
 }
 
 .btn:not(:focus):hover {
-	background-color: rgb(89,215,115);
+	background-color:lightgray;
 	color: white;
 }
 
 .btn:active {
-	color: rgba(0, 0, 0, .55);
-	background-color: rgb(89,215,115);
+	
+	color: rgba(255, 255, 255, .55);
+	background-color: lightgray;
 }
 

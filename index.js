@@ -1,16 +1,16 @@
 function init() {
 
-	function createAndAddClass(elem_type, class_name) {
-		const elem = document.createElement(elem_type);
-		elem.classList.add(class_name);
+	function createAndAddClass(elemType, classType) {
+		const elem = document.createElement(elemType);
+		elem.classList.add(classType);
 		return elem;
 	}
 
 	let count = 0;
-	const plus_sign = document.getElementById('plus');
+	const plusSign = document.getElementById('plus');
 
 	// Building HTML and initializing event listeners
-	plus_sign.addEventListener('click', () => {
+	plusSign.addEventListener('click', () => {
 
 		let counter = count += 1;
 
@@ -27,16 +27,16 @@ function init() {
 		iframe.setAttribute('name', `iFrame_${counter}`);
 		iframe.src = "./iframe.html";
 
-		const iframe_wrapper = createAndAddClass('div', 'iframe-wrapper');
+		const iframeWrapper = createAndAddClass('div', 'iframe-wrapper');
 
-		const iframe_events_cover = createAndAddClass('div', 'iframe-events-cover');
+		const iFrameEvent = createAndAddClass('div', 'iframe-events-cover');
 
-		iframe_wrapper.appendChild(iframe);
+		iframeWrapper.appendChild(iframe);
 
 		wrapper.appendChild(heading);
 		wrapper.appendChild(close);
-		wrapper.appendChild(iframe_wrapper);
-		wrapper.appendChild(iframe_events_cover);
+		wrapper.appendChild(iframeWrapper);
+		wrapper.appendChild(iFrameEvent);
 
 		document.body.appendChild(wrapper);
 
@@ -59,12 +59,12 @@ function init() {
 	}, false);
 	// Making sure elems don't have duplicate event listeners
 	function setMouseDownEvent() {
-		const chat_elems = document.getElementsByClassName('chat-wrapper');
-		for (var i = 0; i < chat_elems.length; i++) {
-			chat_elems[i].removeEventListener('mousedown', mouseDown, false);
-			chat_elems[i].removeEventListener('touchstart', mouseDown, false);
-			chat_elems[i].addEventListener('mousedown', mouseDown, false);
-			chat_elems[i].addEventListener('touchstart', mouseDown, false);
+		const chatElements = document.getElementsByClassName('chat-wrapper');
+		for (var i = 0; i < chatElements.length; i++) {
+			chatElements[i].removeEventListener('mousedown', mouseDown, false);
+			chatElements[i].removeEventListener('touchstart', mouseDown, false);
+			chatElements[i].addEventListener('mousedown', mouseDown, false);
+			chatElements[i].addEventListener('touchstart', mouseDown, false);
 		};
 	}
 
@@ -98,19 +98,16 @@ function init() {
 		window.addEventListener('mouseup', up, false);
 		window.addEventListener('touchend', up, false);
 
-		this.style.backgroundColor = "white";
-		this.style.border = "2px solid rgba(0,0,0,.55)";
-		this.style.borderRadius = "4px";
-		this.style.margin = "8px";
+	
 
 		coverIframeWindows();
 		
 	}
 	// This is an edge case - if pointer happens to be in iFrame window on mouseUp, it steals the event from parent window - so this covers all iFrame windows until mouseUp
 	function coverIframeWindows() {
-		let iframe_covers = document.getElementsByClassName('iframe-events-cover');
-		for (var i = 0; i < iframe_covers.length; i++) {
-			iframe_covers[i].style.zIndex = "2";
+		let iframeCover = document.getElementsByClassName('iframe-events-cover');
+		for (var i = 0; i < iframeCover.length; i++) {
+			iframeCover[i].style.zIndex = "2";
 		};
 	}
 	// Drag chat window
@@ -133,31 +130,6 @@ function init() {
 		this.style.top = offset_y + 'px';
 		this.style.left = offset_x + 'px';
 
-		transitionTrailingFrames.apply(this);
-
-	}
-	// This makes a more interesting transition for the trailing windows when a window is removed from it's spot on drag
-	function transitionTrailingFrames() {
-
-		if (this.has_been_called === false) {
-			const chat_elems = document.getElementsByClassName('chat-wrapper');
-			for (var i = 0; i < chat_elems.length; i++) {
-				// if the window hasn't already been removed, if it's not this window, and for only the windows after this window
-				if (chat_elems[i].dataset.called !== 'true' && this !== chat_elems[i] && parseInt(chat_elems[i].dataset.index) > parseInt(this.dataset.index)) {
-					chat_elems[i].classList.add('fade');
-				};
-			};
-			setTimeout(() => {
-				for (var i = 0; i < chat_elems.length; i++) {
-					chat_elems[i].classList.remove('fade');
-				};
-			}, 110);
-
-			this.has_been_called = true;
-			this.setAttribute('data-called', 'true');
-			
-		};
-		
 	}
 
 	function mouseUp(e) {
@@ -165,10 +137,7 @@ function init() {
 	    window.removeEventListener('mousemove', this.move, false);
 	    window.removeEventListener('touchmove', this.move, false);
 
-		this.style.backgroundColor = "black";
-		this.style.border = "";
-		this.style.borderRadius = "";
-		this.style.margin = "10px";
+	    //Styling
 
 		uncoverIframeWindows();
 
@@ -178,9 +147,9 @@ function init() {
 	}
 
 	function uncoverIframeWindows() {
-		let iframe_covers = document.getElementsByClassName('iframe-events-cover');
-		for (var i = 0; i < iframe_covers.length; i++) {
-			iframe_covers[i].style.zIndex = "0";
+		let iframeCover = document.getElementsByClassName('iframe-events-cover');
+		for (var i = 0; i < iframeCover.length; i++) {
+			iframeCover[i].style.zIndex = "0";
 		};
 	}
 
@@ -207,15 +176,15 @@ function init() {
 			to_remove.parentNode.removeChild(to_remove);
 
 			if (to_remove.has_been_called !== true) {
-				const chat_elems = document.getElementsByClassName('chat-wrapper');
-				for (var i = 0; i < chat_elems.length; i++) {
-					if (chat_elems[i].dataset.called !== 'true' && parseInt(chat_elems[i].dataset.index) > parseInt(to_remove.dataset.index)) {
-						chat_elems[i].classList.add('fade');
+				const chatElements = document.getElementsByClassName('chat-wrapper');
+				for (var i = 0; i < chatElements.length; i++) {
+					if (chatElements[i].dataset.called !== 'true' && parseInt(chatElements[i].dataset.index) > parseInt(to_remove.dataset.index)) {
+						chatElements[i].classList.add('fade');
 					};
 				};
 				setTimeout(() => {
-					for (var i = 0; i < chat_elems.length; i++) {
-						chat_elems[i].classList.remove('fade');
+					for (var i = 0; i < chatElements.length; i++) {
+						chatElements[i].classList.remove('fade');
 					};
 				}, 110);
 
